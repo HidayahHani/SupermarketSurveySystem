@@ -1,0 +1,44 @@
+@model IEnumerable<ParticipationReportViewModel>
+@{ ViewData["Title"] = "Participation Report"; ViewData["BackUrl"] = "/Dashboard"; }
+
+<div style="padding:16px;flex:1;">
+  <h2 style="margin-bottom:4px;">Survey Participation Summary</h2>
+  <p style="margin-bottom:16px;">Total responses grouped by survey, outlet, and merchandiser.</p>
+
+  @if (!Model.Any())
+  {
+    <div class="alert alert-info">No responses have been submitted yet.</div>
+  }
+  else
+  {
+    <div class="report-table-wrap">
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Survey</th>
+            <th>Outlet</th>
+            <th>City</th>
+            <th>Merchandiser</th>
+            <th>Responses</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var row in Model)
+          {
+            <tr>
+              <td>@row.SurveyTitle</td>
+              <td>@row.OutletName</td>
+              <td>@row.City</td>
+              <td>@row.MerchandiserName</td>
+              <td><strong>@row.TotalResponses</strong></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  <div style="margin-top:20px;">
+    <a href="/Reports/Statistics" class="btn btn-outline btn-sm" style="width:auto;display:inline-flex;">View Answer Statistics →</a>
+  </div>
+</div>

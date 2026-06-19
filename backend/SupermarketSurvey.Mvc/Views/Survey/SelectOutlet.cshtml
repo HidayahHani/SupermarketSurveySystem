@@ -1,0 +1,40 @@
+@model IEnumerable<Outlet>
+@{ ViewData["Title"] = "Select Outlet"; ViewData["BackUrl"] = "/Dashboard"; }
+
+<div class="search-wrap">
+  <input type="text" id="search" placeholder="🔍  Search outlet or city…" style="margin-bottom:0;" />
+</div>
+
+<div style="padding:16px;flex:1;" id="outletList">
+  @foreach (var outlet in Model)
+  {
+    <form method="post" class="outlet-form">
+      @Html.AntiForgeryToken()
+      <input type="hidden" name="outletId"   value="@outlet.Id" />
+      <input type="hidden" name="outletName" value="@outlet.OutletName" />
+      <button type="submit" class="list-item" style="width:100%;text-align:left;background:white;cursor:pointer;"
+              data-name="@outlet.OutletName.ToLower()" data-city="@outlet.City.ToLower()" data-code="@outlet.BranchCode.ToLower()">
+        <div class="list-item-icon">🏪</div>
+        <div class="list-item-body">
+          <div class="list-item-title">@outlet.OutletName</div>
+          <div class="list-item-sub">@outlet.BranchCode · @outlet.City</div>
+          <div class="list-item-sub" style="white-space:normal;margin-top:2px;">@outlet.Address</div>
+        </div>
+        <div class="list-item-arrow">›</div>
+      </button>
+    </form>
+  }
+</div>
+
+@section Scripts {
+<script>
+  document.getElementById('search').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.outlet-form').forEach(form => {
+      const btn = form.querySelector('button');
+      const match = btn.dataset.name.includes(q) || btn.dataset.city.includes(q) || btn.dataset.code.includes(q);
+      form.style.display = match ? '' : 'none';
+    });
+  });
+</script>
+}

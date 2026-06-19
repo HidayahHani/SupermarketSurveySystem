@@ -1,0 +1,20 @@
+# .NET build output
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Secrets — never commit real passwords
+appsettings.Production.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+/tmp/
+
+# EF Core migrations (generated, not hand-written)
+backend/SupermarketSurvey.Api/Migrations/

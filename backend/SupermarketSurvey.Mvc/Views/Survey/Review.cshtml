@@ -1,0 +1,60 @@
+@model ReviewViewModel
+@{ ViewData["Title"] = "Review & Submit"; ViewData["BackUrl"] = "/Survey/Questions"; }
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Review</span><span>Step 3 of 3</span></div>
+  <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:100%"></div></div>
+</div>
+
+<div class="review-section">
+
+  <div class="review-block">
+    <h3>Survey Details</h3>
+    <div class="review-row"><span class="review-key">Survey</span><span class="review-value">@Model.SurveyTitle</span></div>
+    <div class="review-row"><span class="review-key">Outlet</span><span class="review-value">@Model.OutletName</span></div>
+    <div class="review-row"><span class="review-key">Merchandiser</span><span class="review-value">@Model.MerchandiserName</span></div>
+  </div>
+
+  <div class="review-block">
+    <h3>Respondent</h3>
+    <div class="review-row"><span class="review-key">Name</span><span class="review-value">@Model.Respondent.Name</span></div>
+    <div class="review-row"><span class="review-key">Age / Gender</span><span class="review-value">@Model.Respondent.Age / @Model.Respondent.Gender</span></div>
+    @if (!string.IsNullOrEmpty(Model.Respondent.Phone))
+    {
+      <div class="review-row"><span class="review-key">Phone</span><span class="review-value">@Model.Respondent.Phone</span></div>
+    }
+    <div class="review-row"><span class="review-key">Occupation</span><span class="review-value">@Model.Respondent.Occupation</span></div>
+    <div class="review-row"><span class="review-key">Income</span><span class="review-value">@Model.Respondent.IncomeRange</span></div>
+    <div class="review-row"><span class="review-key">Location</span><span class="review-value">@Model.Respondent.Location</span></div>
+    <div class="review-row"><span class="review-key">Survey Date</span><span class="review-value">@Model.Respondent.SurveyDate</span></div>
+    @if (!string.IsNullOrEmpty(Model.Respondent.Notes))
+    {
+      <div class="review-row"><span class="review-key">Notes</span><span class="review-value">@Model.Respondent.Notes</span></div>
+    }
+  </div>
+
+  <div class="review-block">
+    <h3>Answers</h3>
+    @foreach (var answer in Model.Answers)
+    {
+      <div class="review-row" style="align-items:flex-start;">
+        <span class="review-key" style="min-width:24px;font-weight:700;color:var(--primary);">Q@answer.QuestionNo</span>
+        <span class="review-value">
+          <span style="font-weight:400;color:var(--text-muted);font-size:.8rem;display:block;margin-bottom:4px;">@answer.QuestionText</span>
+          <span class="badge badge-blue">@answer.OptionLabel. @answer.OptionText</span>
+        </span>
+      </div>
+    }
+  </div>
+
+</div>
+
+<div style="padding:0 16px 32px;">
+  <form method="post" action="/Survey/Submit">
+    @Html.AntiForgeryToken()
+    <div style="display:flex;gap:10px;">
+      <a href="/Survey/Questions" class="btn btn-outline">Back</a>
+      <button type="submit" class="btn btn-primary">✓ Submit Survey</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,51 @@
+@model StatisticsReportViewModel
+@{ ViewData["Title"] = "Answer Statistics"; ViewData["BackUrl"] = "/Reports/Index"; }
+
+<div style="padding:16px;flex:1;">
+  <h2 style="margin-bottom:4px;">Question Answer Statistics</h2>
+  <p style="margin-bottom:16px;">Answer distribution per question for a selected survey.</p>
+
+  <form method="get" class="form-group">
+    <label for="surveyId">Select Survey</label>
+    <select name="surveyId" id="surveyId" onchange="this.form.submit()">
+      <option value="">— Select a survey —</option>
+      @foreach (var survey in Model.Surveys)
+      {
+        <option value="@survey.Id" selected="@(ViewBag.SelectedSurveyId?.ToString() == survey.Id.ToString() ? "selected" : null)">
+          @survey.Title
+        </option>
+      }
+    </select>
+  </form>
+
+  @if (Model.Questions.Any())
+  {
+    <p style="margin-bottom:16px;"><strong>Total responses: @Model.TotalResponses</strong></p>
+
+    @foreach (var question in Model.Questions)
+    {
+      <div class="card">
+        <span class="question-badge">Question @question.OrderNumber</span>
+        <div class="question-text" style="font-size:.95rem;margin-bottom:16px;">@question.QuestionText</div>
+
+        @foreach (var opt in question.Options)
+        {
+          <div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px;">
+              <span><strong>@opt.Label.</strong> @opt.Text</span>
+              <span style="font-weight:700;color:var(--primary);">@opt.Percentage%</span>
+            </div>
+            <div class="progress-bar-outer">
+              <div class="progress-bar-inner" style="width:@opt.Percentage%"></div>
+            </div>
+            <div style="font-size:.75rem;color:var(--text-muted);margin-top:2px;">@opt.Count response(s)</div>
+          </div>
+        }
+      </div>
+    }
+  }
+  else if (ViewBag.SelectedSurveyId != null)
+  {
+    <div class="alert alert-info">No responses recorded for this survey yet.</div>
+  }
+</div>

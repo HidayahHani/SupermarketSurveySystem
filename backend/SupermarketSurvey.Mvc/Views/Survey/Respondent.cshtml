@@ -1,0 +1,110 @@
+@model RespondentViewModel
+@{ ViewData["Title"] = "Respondent Details"; ViewData["BackUrl"] = "/Survey/SelectSurvey"; }
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Respondent Info</span><span>Step 1 of 3</span></div>
+  <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:33%"></div></div>
+</div>
+
+<div style="padding:16px;flex:1;overflow-y:auto;">
+
+  <div class="card" style="background:var(--primary-light);box-shadow:none;margin-bottom:20px;">
+    <div style="display:flex;gap:10px;align-items:center;">
+      <span style="font-size:1.5rem;">📋</span>
+      <div>
+        <div style="font-size:.75rem;font-weight:600;color:var(--primary);text-transform:uppercase;">Survey</div>
+        <div style="font-weight:600;">@ViewBag.SurveyTitle</div>
+      </div>
+    </div>
+  </div>
+
+  <form method="post">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="validation-summary-errors"></div>
+
+    <div class="section-title">Personal Information</div>
+
+    <div class="form-group">
+      <label asp-for="Name" class="required">Full Name</label>
+      <input asp-for="Name" placeholder="e.g. Farah Aishah binti Kamaruddin" />
+      <span asp-validation-for="Name" class="field-validation-error"></span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group">
+        <label asp-for="Age" class="required">Age</label>
+        <input asp-for="Age" type="number" min="1" max="120" placeholder="30" />
+        <span asp-validation-for="Age" class="field-validation-error"></span>
+      </div>
+      <div class="form-group">
+        <label asp-for="Gender" class="required">Gender</label>
+        <select asp-for="Gender">
+          <option value="">Select…</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        <span asp-validation-for="Gender" class="field-validation-error"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label asp-for="Phone">Phone (optional)</label>
+      <input asp-for="Phone" type="tel" placeholder="e.g. 011-2345 6789" />
+    </div>
+
+    <div class="section-title">Socio-Economic</div>
+
+    <div class="form-group">
+      <label asp-for="Occupation" class="required">Occupation</label>
+      <select asp-for="Occupation">
+        <option value="">Select occupation…</option>
+        <option>Pekerja Swasta</option>
+        <option>Usahawan</option>
+        <option>Suri Rumah</option>
+        <option>Pelajar</option>
+        <option>Pekerja Bebas</option>
+        <option>Kakitangan Kerajaan</option>
+        <option>Lain-lain</option>
+      </select>
+      <span asp-validation-for="Occupation" class="field-validation-error"></span>
+    </div>
+
+    <div class="form-group">
+      <label asp-for="IncomeRange" class="required">Pendapatan Bulanan (MYR)</label>
+      <select asp-for="IncomeRange">
+        <option value="">Pilih julat…</option>
+        <option>Bawah RM 3,000</option>
+        <option>RM 3,001 - RM 5,000</option>
+        <option>RM 5,001 - RM 10,000</option>
+        <option>RM 10,001 - RM 20,000</option>
+        <option>Melebihi RM 20,000</option>
+      </select>
+      <span asp-validation-for="IncomeRange" class="field-validation-error"></span>
+    </div>
+
+    <div class="section-title">Location & Survey Date</div>
+
+    <div class="form-group">
+      <label asp-for="Location" class="required">Location / Area</label>
+      <input asp-for="Location" placeholder="e.g. Shah Alam" />
+      <span asp-validation-for="Location" class="field-validation-error"></span>
+    </div>
+
+    <div class="form-group">
+      <label asp-for="SurveyDate" class="required">Survey Date</label>
+      <input asp-for="SurveyDate" type="date" />
+      <span asp-validation-for="SurveyDate" class="field-validation-error"></span>
+    </div>
+
+    <div class="form-group">
+      <label asp-for="Notes">Notes (optional)</label>
+      <textarea asp-for="Notes" placeholder="Any additional observations…"></textarea>
+    </div>
+
+    <div class="nav-footer" style="padding:0;margin-top:8px;">
+      <a href="/Survey/SelectSurvey" class="btn btn-outline">Back</a>
+      <button type="submit" class="btn btn-primary">Next: Questions →</button>
+    </div>
+  </form>
+</div>

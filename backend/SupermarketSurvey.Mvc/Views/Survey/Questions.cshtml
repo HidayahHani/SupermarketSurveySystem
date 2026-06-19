@@ -1,0 +1,50 @@
+@model QuestionnaireViewModel
+@{ ViewData["Title"] = "Questions"; ViewData["BackUrl"] = "/Survey/Respondent"; }
+
+<div class="progress-wrap">
+  <div class="progress-label"><span>Answer Questions</span><span>Step 2 of 3</span></div>
+  <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:66%"></div></div>
+</div>
+
+<form method="post" id="questionForm">
+  @Html.AntiForgeryToken()
+  <div asp-validation-summary="ModelOnly" class="validation-summary-errors" style="margin:12px 16px 0;"></div>
+
+  <div class="question-section">
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+      var q = Model.Questions[i];
+      <div style="margin-bottom:32px;">
+        <span class="question-badge">Question @q.OrderNumber of @Model.Questions.Count</span>
+        <div class="question-text">@q.QuestionText</div>
+
+        <input type="hidden" name="Questions[@i].Id" value="@q.Id" />
+
+        <div class="option-list">
+          @foreach (var opt in q.Options)
+          {
+            <label class="option-card" onclick="this.classList.add('selected'); this.closest('.option-list').querySelectorAll('.option-card').forEach(c=>{ if(c!==this) c.classList.remove('selected'); })">
+              <input type="radio" name="Questions[@i].SelectedOptionId" value="@opt.Id" required />
+              <div class="option-label-badge">@opt.Label</div>
+              <div class="option-text">@opt.Text</div>
+            </label>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="nav-footer">
+    <a href="/Survey/Respondent" class="btn btn-outline">Back</a>
+    <button type="submit" class="btn btn-primary">Review →</button>
+  </div>
+</form>
+
+@section Scripts {
+<script>
+  // Visual selected state on page load (after validation error postback)
+  document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+    radio.closest('.option-card')?.classList.add('selected');
+  });
+</script>
+}

@@ -1,0 +1,32 @@
+@{ ViewData["Title"] = "Survey Complete"; ViewData["BackUrl"] = null; }
+
+<div class="success-wrap">
+  <div class="success-icon">✅</div>
+
+  <h1>Submitted!</h1>
+  <p>The survey has been recorded successfully. Thank you for completing this assessment.</p>
+
+  <div style="background:var(--primary-light);border-radius:var(--radius);padding:16px 20px;width:100%;margin-bottom:24px;text-align:left;">
+    @if (ViewBag.OutletName != null)
+    {
+      <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px;">Outlet</div>
+      <div style="font-weight:600;margin-bottom:12px;">@ViewBag.OutletName</div>
+    }
+    @if (ViewBag.RespondentName != null)
+    {
+      <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px;">Respondent</div>
+      <div style="font-weight:600;">@ViewBag.RespondentName</div>
+    }
+    @if (ViewBag.ResponseId != null)
+    {
+      <div style="font-size:.75rem;color:var(--text-muted);margin-top:12px;">
+        Reference #SR-@ViewBag.ResponseId.ToString().PadLeft(5, '0')
+      </div>
+    }
+  </div>
+
+  <div style="width:100%;display:flex;flex-direction:column;gap:10px;">
+    <a href="/Survey/SelectSurvey" class="btn btn-primary">Conduct Another Survey</a>
+    <a href="/Dashboard" class="btn btn-outline">Back to Dashboard</a>
+  </div>
+</div>

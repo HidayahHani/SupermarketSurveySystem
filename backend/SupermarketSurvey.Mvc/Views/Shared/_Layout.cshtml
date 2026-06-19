@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>@(ViewData["Title"] ?? "SuperMart Survey")</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<div class="page">
+
+  @if (ViewData["HideAppBar"] == null)
+  {
+    <div class="app-bar">
+      @if (ViewData["BackUrl"] != null)
+      {
+        <a href="@ViewData["BackUrl"]" class="back-btn">‹</a>
+      }
+      <h1>@(ViewData["Title"] ?? "SuperMart Survey")</h1>
+      @if (User.Identity?.IsAuthenticated == true && ViewData["HideLogout"] == null)
+      {
+        <a href="/Account/Logout" style="color:white;font-size:.8rem;text-decoration:none;opacity:.85;">Logout</a>
+      }
+    </div>
+  }
+
+  @RenderBody()
+
+</div>
+@RenderSection("Scripts", required: false)
+</body>
+</html>

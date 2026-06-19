@@ -1,0 +1,29 @@
+@{ ViewData["Title"] = "Select Survey"; ViewData["BackUrl"] = "/Survey/SelectOutlet"; }
+
+<div class="user-info-bar">
+  <span style="font-size:1.2rem;">🏪</span>
+  <span>@ViewBag.OutletName</span>
+</div>
+
+<div style="padding:16px;flex:1;">
+  <p style="margin-bottom:16px;">Choose a survey to conduct with the respondent.</p>
+
+  @foreach (var survey in (IEnumerable<dynamic>)Model)
+  {
+    <form method="post">
+      @Html.AntiForgeryToken()
+      <input type="hidden" name="surveyId"    value="@survey.Id" />
+      <input type="hidden" name="surveyTitle" value="@survey.Title" />
+      <button type="submit" class="list-item" style="width:100%;text-align:left;background:white;cursor:pointer;">
+        <div class="list-item-icon">📋</div>
+        <div class="list-item-body">
+          <div class="list-item-title">@survey.Title</div>
+          <div class="list-item-sub">@survey.QuestionCount question(s)
+            @if (survey.Description != null) { <text> · @(((string)survey.Description).Length > 50 ? survey.Description.Substring(0,50) + "…" : survey.Description)</text> }
+          </div>
+        </div>
+        <div class="list-item-arrow">›</div>
+      </button>
+    </form>
+  }
+</div>
