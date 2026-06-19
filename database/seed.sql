@@ -15,14 +15,14 @@ INSERT INTO Outlets (OutletName, BranchCode, Address, City) VALUES
 ('SuperMart Pulau Pinang', 'SMO-005', 'No. 77, Jalan Burma, 10050 Georgetown, Pulau Pinang','Pulau Pinang');
 
 -- ============================================================
--- MERCHANDISERS  (password = "password123")
+-- MERCHANDISERS  (password = "password123", BCrypt hashed)
 -- ============================================================
 INSERT INTO Merchandisers (Name, Age, EmployeeId, Email, PasswordHash, AssignedOutletId) VALUES
-('Ahmad Hafizi bin Razak',       28, 'EMP-001', 'ahmad.hafizi@supermart.my',  '$2a$11$rBCcD3fPiVH8tM6u0y4RyOXLYFKZ5q1mVNi8bHJ0QPSE7cXcWqICq', 1),
-('Nurul Aina binti Ismail',      32, 'EMP-002', 'nurul.aina@supermart.my',    '$2a$11$rBCcD3fPiVH8tM6u0y4RyOXLYFKZ5q1mVNi8bHJ0QPSE7cXcWqICq', 2),
-('Muhammad Syafiq bin Zulkifli', 25, 'EMP-003', 'syafiq@supermart.my',        '$2a$11$rBCcD3fPiVH8tM6u0y4RyOXLYFKZ5q1mVNi8bHJ0QPSE7cXcWqICq', 3),
-('Siti Nabilah binti Hassan',    30, 'EMP-004', 'siti.nabilah@supermart.my',  '$2a$11$rBCcD3fPiVH8tM6u0y4RyOXLYFKZ5q1mVNi8bHJ0QPSE7cXcWqICq', 4),
-('admin',                        35, 'EMP-000', 'admin@supermart.my',          '$2a$11$rBCcD3fPiVH8tM6u0y4RyOXLYFKZ5q1mVNi8bHJ0QPSE7cXcWqICq', 1);
+('Ahmad Hafizi bin Razak',       28, 'EMP-001', 'ahmad.hafizi@supermart.my',  '$2b$12$bzm//bhuO.53Ljn4iyoMIeJgnSZgMA.n9i9oLJSpz7xoPp0frFasi', 1),
+('Nurul Aina binti Ismail',      32, 'EMP-002', 'nurul.aina@supermart.my',    '$2b$12$bzm//bhuO.53Ljn4iyoMIeJgnSZgMA.n9i9oLJSpz7xoPp0frFasi', 2),
+('Muhammad Syafiq bin Zulkifli', 25, 'EMP-003', 'syafiq@supermart.my',        '$2b$12$bzm//bhuO.53Ljn4iyoMIeJgnSZgMA.n9i9oLJSpz7xoPp0frFasi', 3),
+('Siti Nabilah binti Hassan',    30, 'EMP-004', 'siti.nabilah@supermart.my',  '$2b$12$bzm//bhuO.53Ljn4iyoMIeJgnSZgMA.n9i9oLJSpz7xoPp0frFasi', 4),
+('admin',                        35, 'EMP-000', 'admin@supermart.my',          '$2b$12$bzm//bhuO.53Ljn4iyoMIeJgnSZgMA.n9i9oLJSpz7xoPp0frFasi', 1);
 
 -- ============================================================
 -- SURVEYS

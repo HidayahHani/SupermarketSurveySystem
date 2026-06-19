@@ -80,16 +80,6 @@ mysql -u root < database/schema.sql
 mysql -u root supermarket_survey < database/seed.sql
 ```
 
-Then set the merchandiser passwords:
-
-```bash
-python3 -c "
-import bcrypt
-h = bcrypt.hashpw(b'password123', bcrypt.gensalt()).decode()
-print(f\"UPDATE Merchandisers SET PasswordHash = '{h}';\")
-" | mysql -u root supermarket_survey
-```
-
 ### Step 3 — Run the application
 
 ```bash
